@@ -33,11 +33,11 @@ function Home() {
 
   return (
     <>
-      <Navbar1 />
       {loading ? (
         <Loader />
       ) : (
         <>
+        <Navbar1 />
           <Hero>
             <Header
               title="Business Class Luxury"
