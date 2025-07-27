@@ -48,7 +48,6 @@ const Facilities = () => {
       <Row justify="center mt-5" style={{ marginTop: '20px' }}>
         <Link to='/facilities'>
           <button
-
             type='button'
             style={{
               backgroundColor: '#A9822D',
@@ -61,16 +60,14 @@ const Facilities = () => {
               borderColor: '#A9822D',
               fontSize: '15px',
               justifyContent: 'center',
-
-
             }}
             onMouseOver={(e) => {
               e.target.style.backgroundColor = 'white';
-              e.target.style.color = '#A9822D'; // Change text color to match the original button color
+              e.target.style.color = '#A9822D';
             }}
             onMouseOut={(e) => {
               e.target.style.backgroundColor = '#A9822D';
-              e.target.style.color = 'white'; // Restore text color on hover out
+              e.target.style.color = 'white'; 
             }}
           >
             View All

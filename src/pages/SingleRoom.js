@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Carousel as BootstrapCarousel, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { Dialog, DialogTitle, CardMedia, DialogActions, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import axios from 'axios';
 
 import Loader from '../components/Loader';
 import Error from '../components/Error';
@@ -17,6 +16,8 @@ import RoomList from '../components/RoomList';
 import Login from '../components/Login';
 
 function SingleRoom() {
+  const API_URL = process.env.REACT_APP_API_URL;
+  
   const { roomid } = useParams();
   const navigate = useNavigate();
 
@@ -40,8 +41,9 @@ function SingleRoom() {
     setShowLoginModal(false);
   };
 
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+
   const confirmLogin = () => {
-    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
     console.log('currentUser:', currentUser);
 
@@ -55,9 +57,6 @@ function SingleRoom() {
       console.error('Room or room._id is null or undefined.');
     }
   };
-
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,7 +78,7 @@ function SingleRoom() {
   useEffect(() => {
     const fetchRoomData = async () => {
       try {
-        const data = (await axios.post("/api/rooms/getallrooms")).data;
+        const data = (await axios.post(`${API_URL}/api/rooms/getallrooms`)).data;
 
         setRoomDataArray(data);
       } catch (error) {
@@ -126,8 +125,8 @@ function SingleRoom() {
                   fade
                   activeIndex={activeSlide}
                   onSelect={(index) => setActiveSlide(index)}
-                  prevIcon={<BsChevronLeft />} // Use the left chevron icon
-                  nextIcon={<BsChevronRight />} // Use the right chevron icon
+                  prevIcon={<BsChevronLeft />}
+                  nextIcon={<BsChevronRight />}
 
                 >
                   {room.imageurls.map((imageUrl, index) => (
@@ -135,8 +134,8 @@ function SingleRoom() {
                       <img
                         src={imageUrl}
                         alt={`Image ${index + 1}`}
-                        height='440px'  // Set your desired fixed height here
-                        style={{ objectFit: 'cover', width: '100%', borderRadius: '20px' }} // Maintain aspect ratio
+                        height='440px'
+                        style={{ objectFit: 'cover', width: '100%', borderRadius: '20px' }}
                       />
                     </BootstrapCarousel.Item>
 
@@ -185,7 +184,11 @@ function SingleRoom() {
                 </h4>
               </div>
 
-              <button className='btn btn-primary m-2' onClick={confirmLogin}>Book Now</button>
+              {(!currentUser || currentUser.name !== 'Admin') && (
+                <button className='btn btn-primary m-2' onClick={confirmLogin}>
+                  Book Now
+                </button>
+              )}
 
             </div>
           </div>
@@ -198,6 +201,7 @@ function SingleRoom() {
       ) : (
         <Error />
       )}
+
       {/* Login Modal */}
       {showLoginModal && <Login closeModal={closeLoginModal} />}
 

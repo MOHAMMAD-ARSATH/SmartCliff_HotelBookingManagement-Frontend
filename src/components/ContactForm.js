@@ -1,24 +1,25 @@
-import React from 'react';
 import { Form, Input, Button, message, InputNumber } from 'antd';
-import axios from 'axios';
 import { Card, Space, Typography } from 'antd';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import axios from 'axios';
 
 const { Text, Title } = Typography;
 
 const ContactForm = () => {
-  const [form] = Form.useForm(); // Initialize form instance here
+  const API_URL = process.env.REACT_APP_API_URL;
+
+  const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/contacts', values);
+      const response = await axios.post(`${API_URL}/api/contacts`, values);
 
       if (response.status === 201) {
         console.log('Form values submitted successfully:', values);
         message.success('Form submitted successfully');
-        form.resetFields(); // Reset form fields after successful submission
+        form.resetFields();
       } else {
         console.error('Error submitting form values:', response.status);
         message.error('Error submitting form. Please try again.');
@@ -75,12 +76,13 @@ const ContactForm = () => {
             name="message"
             label="Message"
             rules={[
-              { pattern: /^[a-zA-Z\s]{10,}$/, message: 'Only letters are allowed, at least 10 characters.' },
+              { required: true, message: 'Message is required.' },
+              { min: 10, message: 'Message must be at least 10 characters.' },
             ]}
           >
             <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} />
           </Form.Item>
-
+          
           <Form.Item wrapperCol={{ offset: 0, span: 10 }}>
             <Button type="primary" htmlType="submit" className='btn btn-primary' style={{ padding: "4px 12px" }}>
               Submit

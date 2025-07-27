@@ -51,7 +51,7 @@ const AllFacilities = () => {
     { icon: <img src="https://cjpallazzio.com/wp-content/uploads/2023/06/safety-box.png" alt="Spa" width="40px" height="40px" />, text: 'Safe deposit box' },
   ];
 
-  const [loading, setLoading] = useState(true); // Initial loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,12 +60,12 @@ const AllFacilities = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setLoading(false); // Set loading to false even in case of an error
+        setLoading(false);
       }
     };
-
-    fetchData(); // Invoke the data fetching function
-  }, []); // The empty dependency array ensures the effect runs once on mount
+    
+    fetchData();
+  }, []);
 
 
   const breadcrumbsPaths = [
@@ -78,7 +78,7 @@ const AllFacilities = () => {
       <Navbar1 />
       <Breadcrumbs paths={breadcrumbsPaths} />
       {loading ? (
-        <Loader /> // Render your Loader component while loading
+        <Loader />
       ) : (
         <div className='ml-5 mb-5'>
           <Title className='mt-5 ml-2' level={2} style={{ textAlign: 'left', fontSize: "25px" }}>Common Facilities</Title>
@@ -93,10 +93,6 @@ const AllFacilities = () => {
             ))}
           </Row>
 
-
-
-
-
           <Title className='mt-5 ml-2' level={2} style={{ textAlign: 'left', fontSize: "25px" }}>Room Facilities</Title>
           <Row gutter={[16, 8]} justify="space-around">
             {roomFacilityItems.map((item, index) => (
@@ -108,11 +104,9 @@ const AllFacilities = () => {
               </Col>
             ))}
           </Row>
-
         </div>
       )}
       <Footer />
-
     </div>
   );
 };

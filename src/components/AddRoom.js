@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { Form, Input, InputNumber, Button, Select } from "antd";
+import axios from "axios";
 import Swal from "sweetalert2";
 
 import Loader from "./Loader";
@@ -21,11 +21,13 @@ const buttonStyle = {
   color: 'white',
   backgroundColor: 'black',
   borderColor: 'white',
-  padding: "5px 25px",
-  height: '35px',
+  height: '40px',
   fontSize: '16px',
+  borderRadius: '6px',
   float: 'right',
-
+  cursor: 'pointer',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+  transition: 'all 0.3s ease-in-out',
 };
 
 const buttonLayout = {
@@ -36,6 +38,8 @@ const buttonLayout = {
 };
 
 function AddRoom() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [room, setRoom] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -45,7 +49,7 @@ function AddRoom() {
     setError("");
     setLoading(true);
     try {
-      const data = (await axios.post("/api/rooms/addroom", values)).data;
+      const data = (await axios.post(`${API_URL}/api/rooms/addroom`, values)).data;
       Swal.fire(
         "Congratulations",
         "Your Room Added Successfully",
@@ -63,7 +67,7 @@ function AddRoom() {
 
   const validateRoomDescription = (_, value) => {
     if (!value) {
-      return Promise.resolve(); // No validation needed for empty values
+      return Promise.resolve();
     }
 
     if (value.length >= 30) {
@@ -94,7 +98,6 @@ function AddRoom() {
             name="control-hooks"
             onFinish={onFinish}
           >
-            {/* Room Type, Rent per day, and Max Count in a single row */}
 
             <Form.Item
               name="type"
@@ -112,7 +115,7 @@ function AddRoom() {
                 <Option value="Luxury Room">Luxury Room</Option>
               </Select>
             </Form.Item>
-            {/* Room Description */}
+
             <Form.Item
               name="description"
               label="Room Description"
@@ -130,7 +133,6 @@ function AddRoom() {
               <Input.TextArea autoSize={{ minRows: 3, maxRows: 6 }} />
             </Form.Item>
 
-
             <Form.Item
               name="maxcount"
               label="Max Count"
@@ -139,12 +141,10 @@ function AddRoom() {
                   required: true,
                 },
               ]}
-              style={{ flex: 1 }} // Increase the width here
+              style={{ flex: 1 }}
             >
               <InputNumber min={1} defaultChecked={1} />
             </Form.Item>
-
-
 
             <Form.Item
               name="rentperday"
@@ -154,12 +154,11 @@ function AddRoom() {
                   required: true,
                 },
               ]}
-              style={{ flex: 1, marginRight: "8px", width: '100%' }} // Increase the width here
+              style={{ flex: 1, marginRight: "8px", width: '100%' }}
             >
               <InputNumber min={1000} defaultChecked={1} />
             </Form.Item>
 
-            {/* Image URLs */}
             <Form.Item
               name="imageurl1"
               label="Image url1"
@@ -199,10 +198,6 @@ function AddRoom() {
               <Input />
             </Form.Item>
 
-
-
-
-            {/* Facilities */}
             <Form.Item
               name="facilities"
               label="Facilities"
@@ -233,24 +228,21 @@ function AddRoom() {
                         >
                           <Input placeholder="Enter facility" />
                         </Form.Item>
-                        <Button type="primary" onClick={() => remove(name)} style={{ marginBottom: '25px', color: 'white', backgroundColor: 'black', borderColor: 'black' }}>
-                          Remove
+                        <Button type="primary" onClick={() => remove(name)} style={{ marginBottom: '25px', paddingRight: '20px', color: 'white', backgroundColor: 'black', borderColor: 'black' }}>
+                          - Remove
                         </Button>
                       </div>
                     ))}
                     <div style={{ display: 'flex', marginBottom: '8px' }}>
-                      <Button type="primary" onClick={() => add()} style={{ flex: 1, marginRight: '8px', color: 'white', backgroundColor: 'black', borderColor: 'black', maxWidth: '12%' }}>
-                        Add Facility
+                      <Button type="primary" onClick={() => add()} style={{ flex: 1, marginBottom: '5px', paddingRight: '20px', color: 'white', backgroundColor: 'black', borderColor: 'black', maxWidth: '12%' }}>
+                        + Add Facility
                       </Button>
                     </div>
                   </>
-
                 )}
               </Form.List>
             </Form.Item>
 
-
-            {/* Buttons */}
             <Form.Item {...buttonLayout}>
               <Button
                 type="primary"
@@ -264,7 +256,7 @@ function AddRoom() {
                 type="danger"
                 htmlType="button"
                 onClick={onReset}
-                style={{ ...buttonStyle, marginRight: '10px' }}
+                style={{ ...buttonStyle, marginBottom: '20px' }}
                 className="mr-5"
               >
                 Reset All

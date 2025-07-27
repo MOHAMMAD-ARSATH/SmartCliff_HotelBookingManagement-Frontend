@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Navbar1 from '../components/UserNav';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import Loader from '../components/Loader';
 
 function Gallery() {
-  const [loading, setLoading] = useState(true); // Initial loading state
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,12 +16,12 @@ function Gallery() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setLoading(false); // Set loading to false even in case of an error
+        setLoading(false); 
       }
     };
 
-    fetchData(); // Invoke the data fetching function
-  }, []); // The empty dependency array ensures the effect runs once on mount
+    fetchData(); 
+  }, []);
 
   const breadcrumbsPaths = [
     { label: 'Home', link: '/' },
@@ -33,7 +33,7 @@ function Gallery() {
       <Navbar1 />
       <Breadcrumbs paths={breadcrumbsPaths} />
       {loading ? (
-        <Loader /> // Render your Loader component while loading
+        <Loader /> 
       ) : (
         <>
           <GalleryVid />

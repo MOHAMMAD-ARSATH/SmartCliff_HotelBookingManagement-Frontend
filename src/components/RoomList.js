@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Col, Card, Button, Carousel } from 'antd';
 import CurrencyRupeeSharpIcon from '@mui/icons-material/CurrencyRupeeSharp';
 import { Link } from 'react-router-dom';
 
 const RoomList = ({ roomDataArray }) => {
-  const pageSize = 4; // Number of cards per page
+  const pageSize = 4; 
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPage((prevPage) => (prevPage % Math.ceil(roomDataArray.length / pageSize)) + 1);
-    }, 5000); // Slide every 5 seconds
+    }, 5000); 
 
     return () => clearInterval(interval);
   }, [roomDataArray.length]);
@@ -31,7 +31,6 @@ const RoomList = ({ roomDataArray }) => {
         <div className='mt-4'>
           <Link to={`/room/${room._id}`}>
             <button
-
               type='button'
               style={{
                 backgroundColor: 'black',
@@ -46,11 +45,11 @@ const RoomList = ({ roomDataArray }) => {
               }}
               onMouseOver={(e) => {
                 e.target.style.backgroundColor = 'white';
-                e.target.style.color = 'black'; // Change text color to match the original button color
+                e.target.style.color = 'black';
               }}
               onMouseOut={(e) => {
                 e.target.style.backgroundColor = 'black';
-                e.target.style.color = 'white'; // Restore text color on hover out
+                e.target.style.color = 'white'; 
               }}
             >
               View Details
@@ -71,7 +70,7 @@ const RoomList = ({ roomDataArray }) => {
         beforeChange={(from, to) => setCurrentPage(to + 1)}
         afterChange={(current) => setCurrentPage(current + 1)}
         initialSlide={currentPage - 1}
-        vertical={false} // Set to false for a horizontal slider
+        vertical={false} 
       >
         {[...Array(totalSlides)].map((_, page) => (
           <div key={page}>

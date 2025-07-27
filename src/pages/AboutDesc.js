@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import { Dialog } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -7,7 +7,6 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import Navbar1 from '../components/UserNav';
 import Footer from '../components/Footer';
 import Loader from '../components/Loader';
-
 
 const useStyles = makeStyles({
     modal: {
@@ -32,8 +31,7 @@ function AboutDesc() {
         setSelectedImage(null);
     };
 
-    const [loading, setLoading] = useState(true); // Initial loading state
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -41,17 +39,16 @@ function AboutDesc() {
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
-                setLoading(false); // Set loading to false even in case of an error
+                setLoading(false);
             }
         };
 
-        fetchData(); // Invoke the data fetching function
+        fetchData();
     }, []);
 
     const breadcrumbsPaths = [
         { label: 'Home', link: '/' },
         { label: 'About' },
-        // Add more breadcrumb items as needed
     ];
 
     const carouselImages = [
@@ -84,7 +81,6 @@ function AboutDesc() {
                                                 height: "400px",
                                                 borderRadius: "5%"
                                             }}
-
                                         />
                                     </Carousel.Item>
                                 ))}
@@ -104,11 +100,7 @@ function AboutDesc() {
                                 <div>
                                     CJ Pallazzio is a  <span style={{ fontWeight: "bold" }}>“Business Class Luxury”</span> hotel offering comfort stay for it’s guests, located at the Salem – Bangalore NH7 – Junction Main Road Circle, fitted with 72 Rooms, including 12 Suites, 4 Conference halls capable of accommodating more than 800 guests. The Multi Cuisine restaurant, Coffee Shop, Bar, Lounge and Rooftop barbeque at the hotel add to your comfort.
                                 </div>
-
                             </div>
-
-
-
                         </div>
                     </div>
                     <div className='ml-4 mr-5 mb-5' style={{ fontSize: "16px" }}> Enjoy our hospitality; enjoy <span style={{ fontWeight: "bold" }}>‘Business Class Luxury’</span>, be our guest whether you are looking for stopovers between trips or a business visit to the city. Welcoming associates, friends or relatives for a sumptuous celebration is yet another reason to be here. What more, enjoy our exclusive spa and completely unwind to the luxury of our therapy while you are here.</div>
@@ -127,7 +119,6 @@ function AboutDesc() {
                         )}
                     </Dialog>
                 </div>
-
             )}
             <Footer />
         </div>

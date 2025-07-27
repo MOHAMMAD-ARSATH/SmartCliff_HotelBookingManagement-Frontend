@@ -1,4 +1,3 @@
-import React from "react";
 import '../pages/LandingScreen.css';
 
 function Header({ children, title, subtitle }) {

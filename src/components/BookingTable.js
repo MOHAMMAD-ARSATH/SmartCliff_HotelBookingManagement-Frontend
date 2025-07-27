@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Tag, Space, message, Modal, Descriptions } from "antd";
 import { DeleteTwoTone, EyeOutlined } from '@ant-design/icons';
@@ -7,11 +7,13 @@ import Loader from "./Loader";
 import Error from "./Error";
 
 function BookingTable() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [deleteId, setDeleteId] = useState(null);
-  const [viewBooking, setViewBooking] = useState(null); // Track the booking to be viewed
+  const [viewBooking, setViewBooking] = useState(null);
 
   const paginationConfig = {
     pageSize: 6,
@@ -21,7 +23,7 @@ function BookingTable() {
     setError("");
     setLoading(true);
     try {
-      const data = (await axios.post("/api/bookings/getallbookings")).data;
+      const data = (await axios.post(`${API_URL}/api/bookings/getallbookings`)).data;
       const newData = data.map((booking, index) => ({ ...booking, sno: index + 1 }));
       setBookings(newData);
     } catch (error) {

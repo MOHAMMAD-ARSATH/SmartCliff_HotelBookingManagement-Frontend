@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { Layout, Row, Col } from 'antd';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -11,10 +9,10 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const linkStyle = {
-    textDecoration: 'none', // Remove underline
-    display: 'block', // Make it a block element to act like a paragraph
-    color: 'white', // Set the color as needed
-    margin: '8px 0', // Add some margin for spacing
+    textDecoration: 'none',
+    display: 'block',
+    color: 'white',
+    margin: '8px 0',
   };
 
   return (
@@ -32,15 +30,22 @@ const Footer = () => {
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Near NH -7, Salem - 636 004
             </p>
             <p>
-              <PhoneIcon /> &nbsp;&nbsp;&nbsp;+91 427 255 66 77
-
+              <PhoneIcon /> &nbsp;&nbsp;&nbsp;
+              <a href="tel:+914272256333" style={{ textDecoration: "none", color: "inherit" }}>
+                +91 427 225 6333
+              </a>
             </p>
             <p>
-              <PhoneIcon /> &nbsp;&nbsp;&nbsp;+91 70944 63507
+              <PhoneIcon /> &nbsp;&nbsp;&nbsp;
+              <a href="tel:+919488542885" style={{ textDecoration: "none", color: "inherit" }}>
+                +91 94885 42885
+              </a>
             </p>
-
             <p>
-              <EmailIcon /> &nbsp;&nbsp;&nbsp;info@cjpallazzio.com
+              <EmailIcon /> &nbsp;&nbsp;&nbsp;
+              <a href="mailto:info@cjpallazzio.com" style={{ textDecoration: "none", color: "inherit" }}>
+                info@cjpallazzio.com
+              </a>
             </p>
           </div>
         </Col>
@@ -58,12 +63,12 @@ const Footer = () => {
           <p> <Link to="/gallery" style={linkStyle}>
             <KeyboardArrowRightIcon /> Gallery
           </Link></p>
-          {/* <p>      <Link to="/facilities" style={linkStyle}>
-<KeyboardArrowRightIcon/> Facilities
-      </Link></p>
-      <p> <Link to="/contact" style={linkStyle}>
-      <KeyboardArrowRightIcon/> Contact
-      </Link></p> */}
+          {/* <p> <Link to="/facilities" style={linkStyle}>
+            <KeyboardArrowRightIcon /> Facilities
+          </Link></p>
+          <p> <Link to="/contact" style={linkStyle}>
+            <KeyboardArrowRightIcon /> Contact
+          </Link></p> */}
         </Col>
         <Col xs={24} sm={12} md={4}>
           <h3>Rooms</h3>
@@ -72,11 +77,10 @@ const Footer = () => {
           <p>Luxury Room</p>
         </Col>
 
-
         <Col xs={24} sm={12} md={4}>
           <h3>Ask us How</h3>
 
-          <p>      <Link to="/facilities" style={linkStyle}>
+          <p><Link to="/facilities" style={linkStyle}>
             <KeyboardArrowRightIcon /> Facilities
           </Link></p>
           <p> <Link to="/contact" style={linkStyle}>
@@ -85,11 +89,8 @@ const Footer = () => {
         </Col>
 
         <Col xs={24} sm={12} md={4}>
-
-
-
-
           <h3>Our Associate</h3>
+
           <p> <LocationOnIcon /> &nbsp;&nbsp;&nbsp;Coimbatore Jewellers
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;339, 5, Omalur Main Rd,
@@ -99,11 +100,14 @@ const Footer = () => {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salem - 636 009
           </p>
           <p>
-            <PhoneIcon /> &nbsp;&nbsp;&nbsp;+91 427 225 6333
-
+            <a href="tel:+914272256333" style={{ textDecoration: "none", color: "inherit" }}>
+              <PhoneIcon /> &nbsp;&nbsp;&nbsp;+91 427 225 6333
+            </a>
           </p>
           <p>
-            <PhoneIcon /> &nbsp;&nbsp;&nbsp;+91 94885 42885
+            <a href="tel:+919488542885" style={{ textDecoration: "none", color: "inherit" }}>
+              <PhoneIcon /> &nbsp;&nbsp;&nbsp;+91 94885 42885
+            </a>
           </p>
 
           <a href="https://maps.app.goo.gl/VXxTfmQt4MDeL3BE6" target="_blank" rel="noopener noreferrer" style={linkStyle}>
@@ -111,7 +115,6 @@ const Footer = () => {
               <LocationOnIcon /> &nbsp;&nbsp;&nbsp;Branch
             </p>
           </a>
-
 
         </Col>
       </Row>
@@ -123,7 +126,6 @@ const Footer = () => {
           <p>Designed by Mohammad Arsath</p>
         </div>
       </Col>
-
 
     </div>
   );

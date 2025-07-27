@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
@@ -10,21 +10,23 @@ import Facilities1 from '../components/Facilities';
 import FooterPage from '../components/Footer';
 import Navbar1 from '../components/UserNav';
 import Banner from '../components/Banner';
-import Loader from '../components/Loader'; // Import the Loader component
+import Loader from '../components/Loader';
 
 function Home() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [roomDataArray, setRoomDataArray] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRoomData = async () => {
       try {
-        const data = (await axios.post("/api/rooms/getallrooms")).data;
+        const data = (await axios.post(`${API_URL}/api/rooms/getallrooms`)).data;
         setRoomDataArray(data);
       } catch (error) {
         console.error('Error fetching room data:', error);
       } finally {
-        setLoading(false); // Set loading to false whether successful or not
+        setLoading(false);
       }
     };
 
@@ -37,7 +39,7 @@ function Home() {
         <Loader />
       ) : (
         <>
-        <Navbar1 />
+          <Navbar1 />
           <Hero>
             <Header
               title="Business Class Luxury"

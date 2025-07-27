@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { Space, Button, Modal, message, Table, Form, InputNumber, Input, Select, Descriptions } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import axios from "axios";
 
 import Loader from "./Loader";
 import Error from "./Error";
@@ -9,6 +9,8 @@ import Error from "./Error";
 const { Option } = Select;
 
 const RoomTable = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -77,7 +79,7 @@ const RoomTable = () => {
       const { facilities, ...restValues } = values;
       const updatedRoom = { ...editedRoom, ...restValues };
 
-      await axios.post("/api/rooms/editroom", {
+      await axios.post(`${API_URL}/api/rooms/editroom`, {
         roomid: editedRoom._id,
         updatedRoom: updatedRoom,
       });

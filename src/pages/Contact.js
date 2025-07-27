@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import ContactForm from '../components/ContactForm';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Navbar1 from '../components/UserNav';
 import Footer from '../components/Footer';
-import Loader from '../components/Loader'; // Import your Loader component
+import Loader from '../components/Loader';
 
 function Contact() {
-  const [loading, setLoading] = useState(true); // Initial loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,12 +15,12 @@ function Contact() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-        setLoading(false); // Set loading to false even in case of an error
+        setLoading(false);
       }
     };
 
-    fetchData(); // Invoke the data fetching function
-  }, []); // The empty dependency array ensures the effect runs once on mount
+    fetchData();
+  }, []);
 
   const breadcrumbsPaths = [
     { label: 'Home', link: '/' },
@@ -32,7 +32,7 @@ function Contact() {
       <Navbar1 />
       <Breadcrumbs paths={breadcrumbsPaths} />
       {loading ? (
-        <Loader /> // Render your Loader component while loading
+        <Loader />
       ) : (
         <ContactForm />
       )}

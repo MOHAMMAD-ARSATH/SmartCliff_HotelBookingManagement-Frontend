@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, Grid, CardMedia, Dialog, IconButton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
-
 
 const images = [
   "https://cjpallazzio.com/wp-content/uploads/2023/06/gal1.jpg",
@@ -45,7 +44,6 @@ const images = [
   "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/38/9e/luxury-suite.jpg?w=1000&h=-1&s=1",
   "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/38/b1/presidential-suite.jpg?w=1000&h=-1&s=1",
   "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/38/91/gym.jpg?w=1000&h=-1&s=1",
-
   "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/2f/c4/exterior.jpg?w=1000&h=-1&s=1",
 
 ];

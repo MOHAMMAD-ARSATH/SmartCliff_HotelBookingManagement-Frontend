@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Register from "./Register"; 
+import { Modal, Button } from "antd"; 
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import axios from "axios";
+
 import Loader from "./Loader";
 import Error from "./Error";
-import { useNavigate } from "react-router-dom";
-import Register from "./Register"; // Import the Register component
-import { Modal, Button } from "antd"; // Import Modal and Button from Ant Design
-import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 
 function Login({ closeModal }) {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -25,10 +28,9 @@ function Login({ closeModal }) {
     setLoading(false);
     setError("");
     setEmailError("");
-  }, []); // Reset state when the modal is opened
+  }, []);
 
   const validateEmail = (value) => {
-    // Regular expression for email validation
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     if (!value) {
@@ -59,7 +61,7 @@ function Login({ closeModal }) {
   };
 
   async function login() {
-    // Check if fields are empty
+    
     if (!email.trim() || !password) {
       setEmailError(email.trim() ? "" : "Email is required");
       setPasswordError(password ? "" : "Password is required");
@@ -73,12 +75,12 @@ function Login({ closeModal }) {
       name: "Admin"
     };
 
-    if (email.trim() === "hotel@gmail.com" && password === "admin") {
+    if (email.trim() === "hotel@gmail.com" && password === "Admin") {
       sessionStorage.setItem("currentUser", JSON.stringify(user));
       navigate("/admin");
     } else {
       try {
-        const result = (await axios.post("/api/users/login", user)).data;
+        const result = (await axios.post(`${API_URL}/api/users/login`, user)).data;
         sessionStorage.setItem("currentUser", JSON.stringify(result));
         navigate("/allrooms");
       } catch (error) {
@@ -105,8 +107,7 @@ function Login({ closeModal }) {
       onCancel={closeModal}
       footer={[]}
     >
-      {/* {loading && <Loader></Loader>} */}
-      {error.length > 0 && <Error msg={error}></Error>}
+      {loading && <Loader></Loader>}
       {error.length > 0 && <Error msg={error}></Error>}
       <div>
         <h2>Sign In</h2>
@@ -160,4 +161,3 @@ function Login({ closeModal }) {
 }
 
 export default Login;
-

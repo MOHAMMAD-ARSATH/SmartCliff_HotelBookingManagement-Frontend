@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import moment from 'moment';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import Loader from '../components/Loader';
 import Error from '../components/Error';
@@ -14,6 +14,8 @@ import Navbar1 from '../components/UserNav';
 import FooterPage from '../components/Footer';
 
 const BookingRoom = () => {
+    const API_URL = process.env.REACT_APP_API_URL;
+
     const { roomid } = useParams();
     const [fromdate, setfromdate] = useState(null);
     const [todate, settodate] = useState(null);
@@ -34,7 +36,6 @@ const BookingRoom = () => {
     };
 
     const handleBookRoom = () => {
-
         console.log('Room booked from', moment(fromdate).format('DD/MM/YYYY'), 'to', moment(todate).format('DD/MM/YYYY'));
     };
 
@@ -46,7 +47,7 @@ const BookingRoom = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const data = (await axios.post(`/api/rooms/getroombyid`, { roomid })).data;
+                const data = (await axios.post(`${API_URL}/api/rooms/getroombyid`, { roomid })).data;
                 setRoom(data);
                 setLoading(false);
             } catch (error) {
@@ -93,10 +94,10 @@ const BookingRoom = () => {
     const [altphoneError, setaltphoneError] = useState('');
 
     const validatealtaltphone = (value) => {
-        // Regular expression for Indian altphone number validation
+       
         const altphoneRegex = /^[6-9]\d{9}$/;
 
-        const phoneno = currentuser.phone; // Assuming currentuser is available
+        const phoneno = currentuser.phone; 
 
         if (!value) {
             setaltphoneError('Alternate phone number is required');
@@ -124,8 +125,6 @@ const BookingRoom = () => {
         setCurrentUser({ ...currentUser, phone: e.target.value });
     };
 
-
-
     const breadcrumbsPaths = [
         { label: 'Home', link: '/' },
         { label: 'Rooms', link: '/allrooms' },
@@ -134,7 +133,6 @@ const BookingRoom = () => {
     ];
 
     return (
-
         <div>
             <Navbar1 />
             <Breadcrumbs paths={breadcrumbsPaths} />
@@ -142,8 +140,6 @@ const BookingRoom = () => {
                 <Loader />
             ) : room ? (
                 <div className='row m-5 bs'>
-
-
                     <div className='col-md-6'>
                         <h3>{room.type}</h3>
                         {room.imageurls && room.imageurls.length > 0 ? (
@@ -167,11 +163,10 @@ const BookingRoom = () => {
                                             value={currentUser.name}
                                             onChange={handleNameChange}
                                             disabled
-                                            className='form-control' // Add text-center class
+                                            className='form-control'
                                         />
                                     </label>
                                 </div>
-
 
                                 <div className='col-md-6'>
                                     <label style={{ width: "100%" }}>
@@ -181,7 +176,7 @@ const BookingRoom = () => {
                                             value={currentUser.email}
                                             onChange={handleEmailChange}
                                             disabled
-                                            className='form-control' // Add text-center class
+                                            className='form-control' 
                                         />
                                     </label>
                                 </div>
@@ -194,7 +189,7 @@ const BookingRoom = () => {
                                             value={currentuser.phone}
                                             onChange={handlePhoneChange}
                                             disabled
-                                            className='form-control' // Add text-center class
+                                            className='form-control' 
                                         />
                                     </label>
                                 </div>
@@ -215,9 +210,9 @@ const BookingRoom = () => {
                                     selected={fromdate}
                                     onChange={handlefromdateChange}
                                     dateFormat="dd/MM/yyyy"
-                                    minDate={new Date()} // Disable past dates
+                                    minDate={new Date()} 
                                     isClearable
-                                    className='form-control' // Add text-center class
+                                    className='form-control' 
                                 />
                             </div>
 
@@ -227,18 +222,19 @@ const BookingRoom = () => {
                                     selected={todate}
                                     onChange={handletodateChange}
                                     dateFormat="dd/MM/yyyy"
-                                    minDate={fromdate || new Date()} // Disable dates before check-in date
+                                    minDate={fromdate || new Date()} 
                                     isClearable
-                                    className='form-control' // Add text-center class
+                                    className='form-control' 
                                 />
                             </div>
+
                             <div className='col-md-4 mt-3'>
                                 <label><b>Rooms :</b></label>
                                 <div className='input-group'>
                                     <button className='input-group-text mt-2' type="button" style={{ width: "20%", height: '38px' }} onClick={handleDecrement}><i className='fas fa-minus'></i></button>
                                     <input
                                         type='text'
-                                        className='form-control text-center w-25' // Adjust width here, e.g., w-75 for 75% width
+                                        className='form-control text-center w-25' 
                                         value={count}
                                     />
 
@@ -256,18 +252,13 @@ const BookingRoom = () => {
                                 Book Room
                             </button>
                         </Link>
-
                     </div>
-
                 </div>
-
-
             ) : (
                 <Error />
             )}
             <FooterPage />
         </div>
-
     );
 };
 

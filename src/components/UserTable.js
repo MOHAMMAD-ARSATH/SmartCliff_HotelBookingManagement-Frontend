@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Space } from "antd";
 
@@ -6,6 +6,8 @@ import Loader from "./Loader";
 import Error from "./Error";
 
 function UserTable() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -34,8 +36,7 @@ function UserTable() {
     setError("");
     setLoading(true);
     try {
-      const data = (await axios.post("/api/users/getallusers")).data;
-      // Add a new property 'sno' to each user object with auto-incrementing value
+      const data = (await axios.post(`${API_URL}/api/users/getallusers`)).data;
       const newData = data.map((user, index) => ({ ...user, sno: index + 1 }));
       setUsers(newData);
     } catch (error) {

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import StripeCheckout from "react-stripe-checkout";
+import axios from 'axios';
+import moment from 'moment';
 import Swal from "sweetalert2";
 
 import Loader from '../components/Loader';
@@ -13,6 +13,8 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import FooterPage from '../components/Footer';
 
 function BookingScreen() {
+  const API_URL = process.env.REACT_APP_API_URL;
+  
   const { roomid, type, fromdate, todate, count, phoneno, altphone } = useParams();
   const navigate = useNavigate();
 
@@ -20,11 +22,8 @@ function BookingScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
-
-  // Format dates to display without time
   const formattedFromDate = moment(fromdate).format('DD/MM/YYYY');
   const formattedToDate = moment(todate).format('DD/MM/YYYY');
-
 
   const totaldays = moment.duration(moment(todate).diff(moment(fromdate))).asDays() + 1;
   console.log(totaldays);
@@ -69,14 +68,14 @@ function BookingScreen() {
       altphone,
       totalamount,
       totaldays,
-      name: currentUser.name, // Include the user's name
-      email: currentUser.email, // Include the user's email
+      name: currentUser.name,
+      email: currentUser.email,
       token,
     };
 
     try {
       setLoading(true);
-      const result = await axios.post("/api/bookings/bookroom", bookingDetails);
+      const result = await axios.post(`${API_URL}/api/bookings/bookroom`, bookingDetails);
       setLoading(false);
 
       if (result.data === 'Room Booked Successfully') {
@@ -130,7 +129,6 @@ function BookingScreen() {
                 <h1>Booking Info</h1>
                 <hr />
                 <div className='bill'>
-
                   <p><strong>Name :</strong> {JSON.parse(sessionStorage.getItem("currentUser")).name}</p>
                   <p><strong>Email :</strong> {JSON.parse(sessionStorage.getItem("currentUser")).email}</p>
                   <p><strong>Check-In Date :</strong> {formattedFromDate}</p>
@@ -161,8 +159,6 @@ function BookingScreen() {
                 </StripeCheckout>
               </div>
             </div>
-
-
           </div>
         </div>
       ) : (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Card, Grid, CardMedia, Dialog, IconButton } from '@mui/material';
 import { PlayCircleFilled } from '@ant-design/icons';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '35vh',
-    backgroundSize: '100% 150%', // Maintain the image's aspect ratio and cover the entire container
+    backgroundSize: '100% 150%', 
     marginTop: '20px',
     borderRadius: '10px',
     cursor: 'pointer',

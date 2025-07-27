@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Tag } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Tag } from 'antd';
 
 import Loader from '../components/Loader';
 import Navbar1 from '../components/UserNav';
@@ -9,16 +9,19 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import FooterPage from '../components/Footer';
 
 function MyBooking() {
-  const user = JSON.parse(sessionStorage.getItem('currentUser'));
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const [bookings, setbookings] = useState([]);
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState();
+
+  const user = JSON.parse(sessionStorage.getItem('currentUser'));
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         setloading(true);
-        const response = await axios.post('/api/bookings/getbookingbyuserid', { userid: user._id });
+        const response = await axios.post(`${API_URL}/api/bookings/getbookingbyuserid`, { userid: user._id });
         console.log(response.data);
         setbookings(response.data);
         setloading(false);
@@ -28,7 +31,7 @@ function MyBooking() {
       }
     };
 
-    fetchBookings(); // Call the async function
+    fetchBookings(); 
   }, []);
 
   async function cancelBooking(bookingid, roomid) {

@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Button } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
 
 function AdminNav() {
   const [showModal, setShowModal] = useState(false);
+
+  const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("currentUser"));
 
   const handleLogout = () => {
     sessionStorage.removeItem("currentUser");
-    // setShowModal(false);
-    // Redirect to '/' after logout
-    window.location.href = "/";
+    setShowModal(false);
+    navigate("/");
   }
 
   return (
     <div style={{ zIndex: "999", width: "100%", position: "sticky", top: "0px" }}>
       <nav className="navbar navbar-expand-lg">
-        <a className="navbar-brand ml-4" href="/">
+        <Link className="navbar-brand ml-4" to="/">
           <img
             src="https://cjpallazzio.com/wp-content/uploads/2023/06/cj-pallazzio-logo.png"
             height="55px"
             width="110px"
           />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -51,20 +53,20 @@ function AdminNav() {
                 {user.name}
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
+                {user.name == 'Admin' && <Link className="dropdown-item" to="/">
+                  User Panel
+                </Link>}
                 <a
                   className="dropdown-item"
                   onClick={() => setShowModal(true)}
                 >
                   Logout
                 </a>
-
               </div>
             </div>
           </ul>
         </div>
 
-        {/* Logout Confirmation Modal */}
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header >
             <Modal.Title>Confirm Logout</Modal.Title>

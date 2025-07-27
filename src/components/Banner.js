@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import Login from './Login';
 
 const Banner = () => {
@@ -13,7 +14,6 @@ const Banner = () => {
     setShowLoginModal(false);
   };
 
-
   return (
 
     <div className='col-md-12' style={{ background: 'black', height: '18vh', color: 'white' }}>
@@ -25,14 +25,13 @@ const Banner = () => {
             <div style={{ fontSize: '40px' }}>
               <span style={{ color: '#AD8736' }}>10% </span>Off
             </div>
-
           </div>
         </div>
         <div className='col-md-1 mt-4' style={{ color: '#AD8736', fontSize: '50px' }}>
           +
         </div>
-        <div className='col-md-1'>
 
+        <div className='col-md-1'>
         </div>
 
         <div className='col-md-1 mt-2'>
@@ -41,19 +40,15 @@ const Banner = () => {
             <span className='ml-4'>Breakfast*</span></b>
         </div>
 
-
         <div className='col-md-1'>
           <img src="https://cjpallazzio.com/wp-content/uploads/2023/05/divider.png" />
         </div>
-
-
 
         <div className='col-md-1 mt-2'>
           <img src='https://cjpallazzio.com/wp-content/uploads/2023/05/checkouts.png' height='60px' style={{ marginLeft: '8px' }} /><br />
           <b> <span className='ml-3'>24 hrs</span><br />
             Checkout*</b>
         </div>
-
 
         <div className='col-md-1'>
           <img src="https://cjpallazzio.com/wp-content/uploads/2023/05/divider.png" />
@@ -84,11 +79,11 @@ const Banner = () => {
                 }}
                 onMouseOver={(e) => {
                   e.target.style.backgroundColor = 'white';
-                  e.target.style.color = '#A9822D'; // Change text color to match the original button color
+                  e.target.style.color = '#A9822D';
                 }}
                 onMouseOut={(e) => {
                   e.target.style.backgroundColor = '#A9822D';
-                  e.target.style.color = 'white'; // Restore text color on hover out
+                  e.target.style.color = 'white';
                 }}
               >
                 <span style={{ marginRight: '5px' }}></span>Make a Reservation
@@ -100,7 +95,6 @@ const Banner = () => {
 
         {showLoginModal && <Login closeModal={closeLoginModal} />}
       </div>
-
     </div>
   );
 };
