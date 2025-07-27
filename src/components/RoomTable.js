@@ -99,7 +99,7 @@ const RoomTable = () => {
 
   const handleView = async (roomId) => {
     try {
-      const room = (await axios.post("/api/rooms/getroombyid", { roomid: roomId })).data;
+      const room = (await axios.post(`${API_URL}/api/rooms/getroombyid`, { roomid: roomId })).data;
       setViewedRoom(room);
       setViewModalVisible(true);
     } catch (error) {
@@ -119,7 +119,7 @@ const RoomTable = () => {
       content: 'Are you sure you want to delete this room?',
       onOk: async () => {
         try {
-          await axios.post("/api/rooms/deleteroom", { roomid: recordId });
+          await axios.post(`${API_URL}/api/rooms/deleteroom`, { roomid: recordId });
           setRooms((prevRooms) => prevRooms.filter((room) => room._id !== recordId));
           message.success('Room deleted successfully');
         } catch (error) {
@@ -134,7 +134,7 @@ const RoomTable = () => {
     setError("");
     setLoading(true);
     try {
-      const data = (await axios.post("/api/rooms/getallrooms")).data;
+      const data = (await axios.post(`${API_URL}/api/rooms/getallrooms`)).data;
       const newData = data.map((room, index) => ({ ...room, sno: index + 1 }));
       setRooms(newData);
     } catch (error) {
