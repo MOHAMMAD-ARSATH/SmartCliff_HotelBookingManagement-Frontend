@@ -62,7 +62,7 @@ function SingleRoom() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = (await axios.post(`/api/rooms/getroombyid`, { roomid })).data;
+        const data = (await axios.post(`${API_URL}/api/rooms/getroombyid`, { roomid })).data;
         setRoom(data);
         setLoading(false);
       } catch (error) {
