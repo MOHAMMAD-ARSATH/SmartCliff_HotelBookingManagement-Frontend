@@ -37,7 +37,7 @@ function MyBooking() {
   async function cancelBooking(bookingid, roomid) {
     try {
       setloading(true);
-      const result = await (await axios.post('/api/bookings/cancelbooking', { bookingid, roomid })).data;
+      const result = await (await axios.post(`${API_URL}/api/bookings/cancelbooking`, { bookingid, roomid })).data;
       console.log(result);
       setloading(false);
       Swal.fire('Congrats', 'Your booking has been cancelled', 'success').then(result => {
