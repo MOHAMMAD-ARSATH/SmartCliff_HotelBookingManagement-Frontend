@@ -39,7 +39,7 @@ function BookingScreen() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = (await axios.post(`/api/rooms/getroombyid`, { roomid })).data;
+        const data = (await axios.post(`${API_URL}/api/rooms/getroombyid`, { roomid })).data;
         setTotalAmount(data.rentperday * totaldays * count);
         setRoom(data);
         setLoading(false);
