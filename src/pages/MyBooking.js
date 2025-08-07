@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Tag } from 'antd';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import moment from "moment";
 
 import Loader from '../components/Loader';
 import Navbar1 from '../components/UserNav';
@@ -98,7 +99,7 @@ function MyBooking() {
                         {booking.status === 'booked' ? 'CONFIRMED' : 'CANCELLED'}
                       </Tag>
                     </p>
-                    {booking.status !== 'cancelled' && (
+                    {booking.status !== 'cancelled' && moment(booking.fromdate).isAfter(moment()) && (
                       <div className="text-right">
                         <button className="btn btn-primary" onClick={() => cancelBooking(booking._id, booking.roomid)}>
                           CANCEL BOOKING
