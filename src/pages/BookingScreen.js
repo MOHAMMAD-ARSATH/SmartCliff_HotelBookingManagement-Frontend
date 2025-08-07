@@ -14,7 +14,7 @@ import FooterPage from '../components/Footer';
 
 function BookingScreen() {
   const API_URL = process.env.REACT_APP_API_URL;
-  
+
   const { roomid, type, fromdate, todate, count, phoneno, altphone } = useParams();
   const navigate = useNavigate();
 
@@ -22,8 +22,8 @@ function BookingScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
-  const formattedFromDate = moment(fromdate).format('DD/MM/YYYY');
-  const formattedToDate = moment(todate).format('DD/MM/YYYY');
+  const formattedFromDate = moment(fromdate).format("YYYY-MM-DD");
+  const formattedToDate = moment(todate).format("YYYY-MM-DD");
 
   const totaldays = moment.duration(moment(todate).diff(moment(fromdate))).asDays() + 1;
   console.log(totaldays);
@@ -61,10 +61,10 @@ function BookingScreen() {
       room,
       userid: currentUser._id,
       type,
-      fromdate,
-      todate,
+      fromdate: formattedFromDate,
+      todate: formattedToDate,
       count,
-      phoneno,
+      //phoneno,
       altphone,
       totalamount,
       totaldays,
@@ -153,7 +153,7 @@ function BookingScreen() {
                   amount={totalamount * 100}
                   currency="INR"
                   token={onToken}
-                  stripeKey="pk_test_51OAx74SGDjJ9frH6yaQ7jKRMmE76wUebnXtbRavMCD2ZswMpOrLXqkm4C10smB0F50fNEvGVK8h8hgZAJVkxOIMm00h91f22sr"
+                  stripeKey={process.env.REACT_APP_STRIPE_KEY}
                 >
                   <button className='btn btn-primary mt-3'>Pay Now</button>
                 </StripeCheckout>
