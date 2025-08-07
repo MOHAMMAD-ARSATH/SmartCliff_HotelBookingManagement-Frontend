@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
+
 import 'react-datepicker/dist/react-datepicker.css';
 
 import Loader from '../components/Loader';
@@ -22,6 +23,7 @@ const BookingRoom = () => {
     const [room, setRoom] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState();
+    const [showError, setShowError] = useState(false);
     const [users, setUsers] = useState([]);
     const [count, setCount] = useState(1);
     const [altphone, setaltphone] = useState("");
@@ -38,6 +40,17 @@ const BookingRoom = () => {
     const handleBookRoom = () => {
         console.log('Room booked from', moment(fromdate).format('DD/MM/YYYY'), 'to', moment(todate).format('DD/MM/YYYY'));
     };
+
+    useEffect(() => {
+        let timer;
+        if (!loading && error && !room) {
+            timer = setTimeout(() => {
+                setShowError(true);
+            }, 5000);
+        }
+        return () => clearTimeout(timer);
+    }, [loading, error, room]);
+
 
     useEffect(() => {
         // if (!sessionStorage.getItem('currentUser')) {
@@ -94,10 +107,10 @@ const BookingRoom = () => {
     const [altphoneError, setaltphoneError] = useState('');
 
     const validatealtaltphone = (value) => {
-       
+
         const altphoneRegex = /^[6-9]\d{9}$/;
 
-        const phoneno = currentuser.phone; 
+        const phoneno = currentuser.phone;
 
         if (!value) {
             setaltphoneError('Alternate phone number is required');
@@ -176,7 +189,7 @@ const BookingRoom = () => {
                                             value={currentUser.email}
                                             onChange={handleEmailChange}
                                             disabled
-                                            className='form-control' 
+                                            className='form-control'
                                         />
                                     </label>
                                 </div>
@@ -189,7 +202,7 @@ const BookingRoom = () => {
                                             value={currentuser.phone}
                                             onChange={handlePhoneChange}
                                             disabled
-                                            className='form-control' 
+                                            className='form-control'
                                         />
                                     </label>
                                 </div>
@@ -210,9 +223,9 @@ const BookingRoom = () => {
                                     selected={fromdate}
                                     onChange={handlefromdateChange}
                                     dateFormat="dd/MM/yyyy"
-                                    minDate={new Date()} 
+                                    minDate={new Date()}
                                     isClearable
-                                    className='form-control' 
+                                    className='form-control'
                                 />
                             </div>
 
@@ -222,9 +235,9 @@ const BookingRoom = () => {
                                     selected={todate}
                                     onChange={handletodateChange}
                                     dateFormat="dd/MM/yyyy"
-                                    minDate={fromdate || new Date()} 
+                                    minDate={fromdate || new Date()}
                                     isClearable
-                                    className='form-control' 
+                                    className='form-control'
                                 />
                             </div>
 
@@ -234,7 +247,7 @@ const BookingRoom = () => {
                                     <button className='input-group-text mt-2' type="button" style={{ width: "20%", height: '38px' }} onClick={handleDecrement}><i className='fas fa-minus'></i></button>
                                     <input
                                         type='text'
-                                        className='form-control text-center w-25' 
+                                        className='form-control text-center w-25'
                                         value={count}
                                     />
 
@@ -254,17 +267,16 @@ const BookingRoom = () => {
                         </Link>
                     </div>
                 </div>
-            ) : (
-                <Error />
-            )}
+            ) : error ? (
+                showError ? (
+                    <Error />
+                ) : (
+                    <Loader />
+                )
+            ) : null}
             <FooterPage />
         </div>
     );
 };
 
 export default BookingRoom;
-
-
-
-
-
