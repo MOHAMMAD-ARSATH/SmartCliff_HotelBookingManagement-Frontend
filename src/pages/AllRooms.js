@@ -51,7 +51,7 @@ const AllRooms = () => {
           description={<span style={{ fontSize: '16px' }}><CurrencyRupeeSharpIcon /> Starts from Rs. {room.rentperday}</span>}
         />
         <div className='mt-3'>
-          // <Link to={`/room/${room._id}`}>
+           {/* <Link to={`/room/${room._id}`}> */}
             <button
               type='button'
               style={{
@@ -76,7 +76,7 @@ const AllRooms = () => {
             >
               View Details
             </button>
-          // </Link>
+         {/* </Link> */}
         </div>
       </Card>
     </Col>
