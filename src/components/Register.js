@@ -46,11 +46,11 @@ function Register({ closeModal }) {
   }, [email]);
 
   const validateName = (value) => {
-    const nameRegex = /^[a-zA-Z]{4,}$/;
+    const nameRegex = /^[a-zA-Z .]{4,}$/;
     if (!value) {
       setNameError("Name is required");
     } else if (!nameRegex.test(value)) {
-      setNameError("Name must have at least 4 letters");
+      setNameError("Name must have at least 4 characters (letters, spaces, and dot allowed)");
     } else {
       setNameError("");
     }
