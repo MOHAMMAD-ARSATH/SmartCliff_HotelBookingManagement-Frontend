@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Card, Button, Carousel } from 'antd';
 import CurrencyRupeeSharpIcon from '@mui/icons-material/CurrencyRupeeSharp';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const RoomList = ({ roomDataArray }) => {
   const pageSize = 4; 
   const [currentPage, setCurrentPage] = useState(1);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,6 +24,7 @@ const RoomList = ({ roomDataArray }) => {
         hoverable
         style={{ width: 300, marginBottom: 16, marginRight: 1, overflow: 'hidden' }}
         cover={<img alt={`Room ${index}`} src={room.imageurls[0]} height='200px' style={{ borderRadius: '10px', border: '2px solid white' }} />}
+        onClick={() => navigate(`/room/${room._id}`)}
       >
         <Card.Meta
           title={<span style={{ fontSize: '18px' }}>{room.type}</span>}
@@ -29,7 +32,7 @@ const RoomList = ({ roomDataArray }) => {
         />
 
         <div className='mt-4'>
-          <Link to={`/room/${room._id}`}>
+          // <Link to={`/room/${room._id}`}>
             <button
               type='button'
               style={{
@@ -54,7 +57,7 @@ const RoomList = ({ roomDataArray }) => {
             >
               View Details
             </button>
-          </Link>
+          // </Link>
         </div>
       </Card>
     </Col>
