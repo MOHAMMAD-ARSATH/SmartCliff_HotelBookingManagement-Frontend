@@ -53,8 +53,8 @@ function Home() {
           <Banner />
           <About />
           <div style={{ height: "90vh", backgroundColor: "#F0F1F3" }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div className='ml-5 mt-5' style={{ fontSize: "24px", fontWeight: "bold" }}>Explore Our Rooms</div>
+            <div className='ml-5' style={{ display: 'flex', alignItems: 'center' }}>
+              <div className='mt-5' style={{ fontSize: "24px", fontWeight: "bold" }}>Explore Our Rooms</div>
               <Link to='/allrooms'>
                 <button
                   type='button'
