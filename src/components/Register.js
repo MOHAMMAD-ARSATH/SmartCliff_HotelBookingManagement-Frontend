@@ -46,7 +46,7 @@ function Register({ closeModal }) {
   }, [email]);
 
   const validateName = (value) => {
-    const nameRegex = /^[a-zA-Z .]{4,}$/;
+    const nameRegex = /^(?=.*[a-zA-Z])[a-zA-Z .]{4,}$/;
     if (!value) {
       setNameError("Name is required");
     } else if (!nameRegex.test(value)) {
