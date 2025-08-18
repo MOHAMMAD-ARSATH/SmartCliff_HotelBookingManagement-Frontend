@@ -32,7 +32,7 @@ const RoomList = ({ roomDataArray }) => {
         />
 
         <div className='mt-4'>
-          // <Link to={`/room/${room._id}`}>
+           {/* <Link to={`/room/${room._id}`}> */}
             <button
               type='button'
               style={{
@@ -57,7 +57,7 @@ const RoomList = ({ roomDataArray }) => {
             >
               View Details
             </button>
-          // </Link>
+          {/* </Link> */}
         </div>
       </Card>
     </Col>
