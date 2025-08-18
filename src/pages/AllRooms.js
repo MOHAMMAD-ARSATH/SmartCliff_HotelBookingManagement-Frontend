@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Card } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CurrencyRupeeSharpIcon from '@mui/icons-material/CurrencyRupeeSharp';
 
@@ -19,6 +19,8 @@ const AllRooms = () => {
 
   const [roomDataArray, setRoomDataArray] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRoomData = async () => {
@@ -42,13 +44,14 @@ const AllRooms = () => {
         hoverable
         style={{ width: 300, marginBottom: 16, marginRight: 5, overflow: 'hidden' }}
         cover={<img alt={`Room ${index}`} src={room.imageurls[0]} height='200px' style={{ borderRadius: '10px', border: '2px solid white' }} />}
+        onClick={() => navigate(`/room/${room._id}`)}
       >
         <Card.Meta
           title={<span style={{ fontSize: '18px' }}>{room.type}</span>}
           description={<span style={{ fontSize: '16px' }}><CurrencyRupeeSharpIcon /> Starts from Rs. {room.rentperday}</span>}
         />
         <div className='mt-3'>
-          <Link to={`/room/${room._id}`}>
+          // <Link to={`/room/${room._id}`}>
             <button
               type='button'
               style={{
@@ -73,7 +76,7 @@ const AllRooms = () => {
             >
               View Details
             </button>
-          </Link>
+          // </Link>
         </div>
       </Card>
     </Col>
