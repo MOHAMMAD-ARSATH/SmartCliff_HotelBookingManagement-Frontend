@@ -2,7 +2,8 @@ import { Carousel } from 'react-bootstrap';
 
 function Hero({ children, hero }) {
   const carouselImages = [
-    "https://az712897.vo.msecnd.net/images/full/64570948-5837-4d03-bede-dceff6de0000.jpeg?k=7b1b232b5c55f70ba9fba3653f6b3bbffc00b2cc4f14bf3f9f28e6eaf44f7b97&o=&hp=1",
+    // "https://az712897.vo.msecnd.net/images/full/64570948-5837-4d03-bede-dceff6de0000.jpeg?k=7b1b232b5c55f70ba9fba3653f6b3bbffc00b2cc4f14bf3f9f28e6eaf44f7b97&o=&hp=1",
+    "https://imgcy.trivago.com/c_limit,d_dummy.jpeg,f_auto,h_1020,q_auto,w_2000/partner-images/13/08/96730f7d569b302885ad9160bf69209be648708630b9327ba1b386f3f84c.jpeg",
     // "https://cf.bstatic.com/xdata/images/hotel/max1024x768/236103734.jpg?k=05a8d7dc565903ffa66072fc3136c2b2fd9a0c1fa23095122aca4e38c444da7b&o=&hp=1",
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/236103734.jpg?k=05a8d7dc565903ffa66072fc3136c2b2fd9a0c1fa23095122aca4e38c444da7b&o=&hp=1",
     "http://cj-pallazzio.hotelsintamilnadu.com/data/Pics/OriginalPhoto/13991/1399114/1399114730/cj-pallazzio-hotel-salem-pic-2.JPEG",
